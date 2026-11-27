@@ -1,0 +1,200 @@
+index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cloud Monitoring Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #0f172a;
+            color: white;
+        }
+
+        header {
+            background: #111827;
+            padding: 20px 40px;
+            border-bottom: 1px solid #334155;
+        }
+
+        header h1 {
+            color: #38bdf8;
+        }
+
+        header p {
+            color: #94a3b8;
+            margin-top: 5px;
+        }
+
+        .container {
+            padding: 30px;
+        }
+
+        .status {
+            background: #064e3b;
+            color: #6ee7b7;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 25px;
+        }
+
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #334155;
+        }
+
+        .card h3 {
+            color: #94a3b8;
+            margin-bottom: 15px;
+        }
+
+        .value {
+            font-size: 32px;
+            font-weight: bold;
+            color: #38bdf8;
+        }
+
+        .green {
+            color: #4ade80;
+        }
+
+        .orange {
+            color: #fb923c;
+        }
+
+        .section {
+            margin-top: 30px;
+            background: #1e293b;
+            padding: 25px;
+            border-radius: 12px;
+        }
+
+        .section h2 {
+            margin-bottom: 20px;
+        }
+
+        .server {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            background: #0f172a;
+            margin-bottom: 10px;
+            border-radius: 8px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <h1>☁ Cloud Monitoring Dashboard</h1>
+    <p>Virtual Machine Monitoring & Auto Scaling Project</p>
+</header>
+
+<div class="container">
+
+    <div class="status">
+        ● System Status: Operational
+    </div>
+
+    <div class="cards">
+
+        <div class="card">
+            <h3>CPU Usage</h3>
+            <div class="value" id="cpu">24%</div>
+            <p>Normal operation</p>
+        </div>
+
+        <div class="card">
+            <h3>Memory Usage</h3>
+            <div class="value" id="memory">56%</div>
+            <p>Memory utilization</p>
+        </div>
+
+        <div class="card">
+            <h3>Active Servers</h3>
+            <div class="value green" id="servers">1</div>
+            <p>Virtual machine instances</p>
+        </div>
+
+        <div class="card">
+            <h3>Server Status</h3>
+            <div class="value green">Online</div>
+            <p>Website is running</p>
+        </div>
+
+    </div>
+
+    <div class="section">
+        <h2>Virtual Machine Instances</h2>
+
+        <div class="server">
+            <span>VM-01</span>
+            <span class="green">● Running</span>
+        </div>
+
+        <div class="server">
+            <span>VM-02</span>
+            <span style="color: #64748b;">● Not deployed</span>
+        </div>
+
+        <div class="server">
+            <span>VM-03</span>
+            <span style="color: #64748b;">● Not deployed</span>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>Auto Scaling Configuration</h2>
+
+        <div class="server">
+            <span>Minimum Instances</span>
+            <span>1</span>
+        </div>
+
+        <div class="server">
+            <span>Maximum Instances</span>
+            <span>3</span>
+        </div>
+
+        <div class="server">
+            <span>Scale Out Trigger</span>
+            <span class="orange">CPU above 70%</span>
+        </div>
+
+        <div class="server">
+            <span>Scale In Trigger</span>
+            <span class="green">CPU below 30%</span>
+        </div>
+    </div>
+
+</div>
+
+<footer>
+    Cloud Infrastructure Project | GitHub Automated Deployment
+</footer>
+
+</body>
+</html>
