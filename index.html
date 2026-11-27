@@ -1,109 +1,179 @@
-index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cloud Monitoring Dashboard</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, sans-serif;
-        }
+<title>Cloud Monitoring Dashboard</title>
 
-        body {
-            background: #0f172a;
-            color: white;
-        }
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
 
-        header {
-            background: #111827;
-            padding: 20px 40px;
-            border-bottom: 1px solid #334155;
-        }
+body {
+    background: #0f172a;
+    color: white;
+}
 
-        header h1 {
-            color: #38bdf8;
-        }
+header {
+    background: #111827;
+    padding: 25px 40px;
+    border-bottom: 1px solid #334155;
+}
 
-        header p {
-            color: #94a3b8;
-            margin-top: 5px;
-        }
+header h1 {
+    color: #38bdf8;
+    margin-bottom: 8px;
+}
 
-        .container {
-            padding: 30px;
-        }
+header p {
+    color: #94a3b8;
+}
 
-        .status {
-            background: #064e3b;
-            color: #6ee7b7;
-            padding: 15px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-        }
+.container {
+    padding: 30px;
+    max-width: 1400px;
+    margin: auto;
+}
 
-        .cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 20px;
-        }
+.status {
+    background: #064e3b;
+    color: #6ee7b7;
+    padding: 18px;
+    border-radius: 10px;
+    margin-bottom: 25px;
+    font-weight: bold;
+}
 
-        .card {
-            background: #1e293b;
-            padding: 25px;
-            border-radius: 12px;
-            border: 1px solid #334155;
-        }
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
 
-        .card h3 {
-            color: #94a3b8;
-            margin-bottom: 15px;
-        }
+.card {
+    background: #1e293b;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+}
 
-        .value {
-            font-size: 32px;
-            font-weight: bold;
-            color: #38bdf8;
-        }
+.card h3 {
+    color: #94a3b8;
+    margin-bottom: 15px;
+}
 
-        .green {
-            color: #4ade80;
-        }
+.value {
+    font-size: 35px;
+    font-weight: bold;
+    color: #38bdf8;
+    margin-bottom: 10px;
+}
 
-        .orange {
-            color: #fb923c;
-        }
+.green {
+    color: #4ade80;
+}
 
-        .section {
-            margin-top: 30px;
-            background: #1e293b;
-            padding: 25px;
-            border-radius: 12px;
-        }
+.orange {
+    color: #fb923c;
+}
 
-        .section h2 {
-            margin-bottom: 20px;
-        }
+.red {
+    color: #f87171;
+}
 
-        .server {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px;
-            background: #0f172a;
-            margin-bottom: 10px;
-            border-radius: 8px;
-        }
+.section {
+    margin-top: 30px;
+    background: #1e293b;
+    padding: 25px;
+    border-radius: 12px;
+    border: 1px solid #334155;
+}
 
-        footer {
-            text-align: center;
-            padding: 25px;
-            color: #64748b;
-        }
-    </style>
+.section h2 {
+    margin-bottom: 20px;
+}
+
+.server {
+    display: flex;
+    justify-content: space-between;
+    padding: 17px;
+    background: #0f172a;
+    margin-bottom: 12px;
+    border-radius: 8px;
+}
+
+.server:last-child {
+    margin-bottom: 0;
+}
+
+.progress-container {
+    background: #334155;
+    height: 12px;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 15px;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0%;
+    background: #38bdf8;
+    border-radius: 20px;
+    transition: width 1s ease;
+}
+
+.cpu-bar {
+    background: #38bdf8;
+}
+
+.memory-bar {
+    background: #a78bfa;
+}
+
+.footer {
+    text-align: center;
+    padding: 30px;
+    color: #64748b;
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    background: #064e3b;
+    color: #6ee7b7;
+}
+
+.updated {
+    color: #64748b;
+    font-size: 13px;
+    margin-top: 20px;
+}
+
+@media (max-width: 600px) {
+    header {
+        padding: 20px;
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .server {
+        font-size: 14px;
+    }
+
+    .value {
+        font-size: 28px;
+    }
+}
+</style>
 </head>
 
 <body>
@@ -115,7 +185,7 @@ index.html
 
 <div class="container">
 
-    <div class="status">
+    <div class="status" id="systemStatus">
         ● System Status: Operational
     </div>
 
@@ -124,13 +194,21 @@ index.html
         <div class="card">
             <h3>CPU Usage</h3>
             <div class="value" id="cpu">24%</div>
-            <p>Normal operation</p>
+            <p id="cpuStatus">Normal operation</p>
+
+            <div class="progress-container">
+                <div class="progress-bar cpu-bar" id="cpuBar"></div>
+            </div>
         </div>
 
         <div class="card">
             <h3>Memory Usage</h3>
             <div class="value" id="memory">56%</div>
             <p>Memory utilization</p>
+
+            <div class="progress-container">
+                <div class="progress-bar memory-bar" id="memoryBar"></div>
+            </div>
         </div>
 
         <div class="card">
@@ -141,8 +219,8 @@ index.html
 
         <div class="card">
             <h3>Server Status</h3>
-            <div class="value green">Online</div>
-            <p>Website is running</p>
+            <div class="value green" id="serverStatus">Online</div>
+            <p id="uptime">System uptime: 99.9%</p>
         </div>
 
     </div>
@@ -152,17 +230,17 @@ index.html
 
         <div class="server">
             <span>VM-01</span>
-            <span class="green">● Running</span>
+            <span id="vm1">● Running</span>
         </div>
 
         <div class="server">
             <span>VM-02</span>
-            <span style="color: #64748b;">● Not deployed</span>
+            <span id="vm2">● Not deployed</span>
         </div>
 
         <div class="server">
             <span>VM-03</span>
-            <span style="color: #64748b;">● Not deployed</span>
+            <span id="vm3">● Not deployed</span>
         </div>
     </div>
 
@@ -188,13 +266,198 @@ index.html
             <span>Scale In Trigger</span>
             <span class="green">CPU below 30%</span>
         </div>
+
+        <div class="server">
+            <span>Autoscaling Status</span>
+            <span id="scalingStatus" class="green">Monitoring</span>
+        </div>
     </div>
+
+    <div class="section">
+        <h2>System Information</h2>
+
+        <div class="server">
+            <span>Operating System</span>
+            <span>Linux Server</span>
+        </div>
+
+        <div class="server">
+            <span>Web Server</span>
+            <span>NGINX</span>
+        </div>
+
+        <div class="server">
+            <span>Deployment Method</span>
+            <span>GitHub Actions</span>
+        </div>
+
+        <div class="server">
+            <span>Monitoring</span>
+            <span>Live Simulation</span>
+        </div>
+    </div>
+
+    <p class="updated" id="lastUpdated">
+        Last updated: Loading...
+    </p>
 
 </div>
 
-<footer>
+<div class="footer">
     Cloud Infrastructure Project | GitHub Automated Deployment
-</footer>
+</div>
+
+<script>
+
+let cpuUsage = 24;
+let memoryUsage = 56;
+let activeServers = 1;
+
+function randomChange(value, amount) {
+    return value + Math.floor(Math.random() * (amount * 2 + 1)) - amount;
+}
+
+function updateDashboard() {
+
+    // Random CPU simulation
+    cpuUsage = randomChange(cpuUsage, 15);
+
+    // Keep CPU between 5 and 95
+    cpuUsage = Math.max(5, Math.min(95, cpuUsage));
+
+    // Random memory simulation
+    memoryUsage = randomChange(memoryUsage, 6);
+
+    // Keep memory between 20 and 90
+    memoryUsage = Math.max(20, Math.min(90, memoryUsage));
+
+    // Simulated autoscaling
+    if (cpuUsage >= 70) {
+        activeServers = 3;
+    }
+    else if (cpuUsage >= 50) {
+        activeServers = 2;
+    }
+    else {
+        activeServers = 1;
+    }
+
+    // Update CPU
+    document.getElementById("cpu").innerText = cpuUsage + "%";
+
+    document.getElementById("cpuBar").style.width =
+        cpuUsage + "%";
+
+    // CPU colours
+    if (cpuUsage >= 70) {
+        document.getElementById("cpu").style.color = "#fb923c";
+        document.getElementById("cpuBar").style.background = "#fb923c";
+        document.getElementById("cpuStatus").innerText = "High CPU usage";
+    }
+    else {
+        document.getElementById("cpu").style.color = "#38bdf8";
+        document.getElementById("cpuBar").style.background = "#38bdf8";
+        document.getElementById("cpuStatus").innerText = "Normal operation";
+    }
+
+    // Update memory
+    document.getElementById("memory").innerText =
+        memoryUsage + "%";
+
+    document.getElementById("memoryBar").style.width =
+        memoryUsage + "%";
+
+    // Update server count
+    document.getElementById("servers").innerText =
+        activeServers;
+
+    // Update VM status
+    document.getElementById("vm1").innerHTML =
+        '<span class="green">● Running</span>';
+
+    if (activeServers >= 2) {
+        document.getElementById("vm2").innerHTML =
+            '<span class="green">● Running</span>';
+    }
+    else {
+        document.getElementById("vm2").innerHTML =
+            '<span style="color:#64748b">● Not deployed</span>';
+    }
+
+    if (activeServers >= 3) {
+        document.getElementById("vm3").innerHTML =
+            '<span class="green">● Running</span>';
+    }
+    else {
+        document.getElementById("vm3").innerHTML =
+            '<span style="color:#64748b">● Not deployed</span>';
+    }
+
+    // Update system status
+    let status = document.getElementById("systemStatus");
+    let scaling = document.getElementById("scalingStatus");
+
+    if (cpuUsage >= 70) {
+
+        status.innerHTML =
+            "⚠ High CPU usage — Autoscaling activated";
+
+        status.style.background = "#7c2d12";
+        status.style.color = "#fdba74";
+
+        scaling.innerHTML = "Scaling Out";
+        scaling.style.color = "#fb923c";
+
+    }
+    else if (cpuUsage >= 50) {
+
+        status.innerHTML =
+            "● Increased load — Additional server active";
+
+        status.style.background = "#78350f";
+        status.style.color = "#fcd34d";
+
+        scaling.innerHTML = "Additional Instance";
+        scaling.style.color = "#fcd34d";
+
+    }
+    else {
+
+        status.innerHTML =
+            "● System Status: Operational";
+
+        status.style.background = "#064e3b";
+        status.style.color = "#6ee7b7";
+
+        scaling.innerHTML = "Monitoring";
+        scaling.style.color = "#4ade80";
+    }
+
+    // Update server status
+    document.getElementById("serverStatus").innerText =
+        "Online";
+
+    // Update timestamp
+    let now = new Date();
+
+    document.getElementById("lastUpdated").innerText =
+        "Last updated: " + now.toLocaleTimeString();
+
+    // Console logging
+    console.log("Monitoring update:", {
+        CPU: cpuUsage + "%",
+        Memory: memoryUsage + "%",
+        ActiveServers: activeServers
+    });
+}
+
+// Initial dashboard update
+updateDashboard();
+
+// Update every 3 seconds
+setInterval(updateDashboard, 3000);
+
+</script>
 
 </body>
 </html>
